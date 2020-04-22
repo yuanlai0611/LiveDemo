@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PlayActivity">
+
+    <com.pili.pldroid.player.widget.PLVideoTextureView
+        android:id="@+id/livePlv"
+        android:layout_width="match_parent"
+        android:layout_height="230dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bulletRv"
+        android:layout_above="@+id/sendBtn"
+        android:layout_below="@+id/livePlv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <EditText
+        android:id="@+id/bulletEt"
+        android:layout_below="@+id/bulletRv"
+        android:layout_toStartOf="@+id/sendBtn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inputType="text"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
+
+    <Button
+        android:id="@+id/sendBtn"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:text="@string/send_bullet_screen"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

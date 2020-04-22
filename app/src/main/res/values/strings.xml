@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">LiveDemo</string>
+    <string name="btn_live_record">直播录制</string>
+    <string name="btn_live_play">直播播放</string>
+    <string name="btn_start_upload">开始推流</string>
+    <string name="btn_stop_upload">停止推流</string>
+    <string name="btn_start_record">开始录制</string>
+    <string name="btn_stop_record">停止录制</string>
+    <string name="btn_play_live">播放直播</string>
+    <string name="btn_stop_live">停止直播</string>
+    <string name="send_bullet_screen">发送弹幕</string>
+    <string name="usr_name">用户名</string>
+    <string name="password">密码</string>
+    <string name="login">登录</string>
+    <string name="avatar">头像</string>
+    <string name="nick">昵称</string>
+    <string name="swap_camera">切换摄像头</string>
+    <string name="start_live">开始直播</string>
 </resources>
