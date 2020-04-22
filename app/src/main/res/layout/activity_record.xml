@@ -8,12 +8,13 @@
 
     <me.lake.librestreaming.ws.StreamLiveCameraView
         android:id="@+id/liveCv"
-        android:layout_above="@+id/liveUrlEt"
+        android:layout_above="@+id/bulletEt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <EditText
-        android:id="@+id/liveUrlEt"
+        android:hint="@string/send_bullet_hint"
+        android:id="@+id/bulletEt"
         android:layout_above="@+id/ll_btn"
         android:singleLine="true"
         android:layout_width="match_parent"
@@ -30,8 +31,8 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/startLiveBtn"
-            android:text="@string/start_live"
+            android:id="@+id/sendBtn"
+            android:text="@string/send_bullet"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

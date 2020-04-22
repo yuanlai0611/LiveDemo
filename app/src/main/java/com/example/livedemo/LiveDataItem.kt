@@ -9,5 +9,8 @@ data class LiveDataItem(
     val num: Int = 1000,
     val avatarUrl: String = "",
     val usrName: String = "TESTV官方频道",
-    val title: String = "TESTV一起聊聊天吃吃面"
+    val title: String = "TESTV一起聊聊天吃吃面",
+    val phone: String = "",
+    val usrId: Int = 0,
+    val roomNum: String = ""
 )

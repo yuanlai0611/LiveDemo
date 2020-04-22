@@ -7,8 +7,20 @@
     android:orientation="vertical"
     tools:context=".LoginActivity">
 
+    <com.gcssloop.widget.RCImageView
+        app:round_as_circle="true"
+        android:id="@+id/switchRiv"
+        android:layout_margin="15dp"
+        android:layout_gravity="end"
+        android:padding="10dp"
+        android:background="@color/colorLightGray"
+        android:src="@drawable/login_register_switch"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="200dp"
+        android:id="@+id/userNameTIL"
+        android:layout_marginTop="160dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_width="match_parent"
@@ -24,7 +36,8 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="30dp"
+        android:id="@+id/passwordTIL"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_width="match_parent"
@@ -34,6 +47,40 @@
             android:hint="@string/password"
             android:id="@+id/passwordEt"
             android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/roomNameTIL"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:hint="@string/room_name"
+            android:id="@+id/roomNameEt"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/phoneTIL"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:hint="@string/phone"
+            android:id="@+id/phoneEt"
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

@@ -16,4 +16,9 @@
     <string name="nick">昵称</string>
     <string name="swap_camera">切换摄像头</string>
     <string name="start_live">开始直播</string>
+    <string name="register">注册</string>
+    <string name="room_name">房间名</string>
+    <string name="phone">手机号</string>
+    <string name="send_bullet">发送弹幕</string>
+    <string name="send_bullet_hint">发弹幕</string>
 </resources>

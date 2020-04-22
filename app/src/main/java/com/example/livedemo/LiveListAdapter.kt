@@ -7,7 +7,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_live.view.*
 
-class LiveListAdapter(private val ctx: Context, private val liveDataItems: List<LiveDataItem>): RecyclerView.Adapter<LiveViewHolder>() {
+class LiveListAdapter(private val ctx: Context, private var liveDataItems: List<LiveDataItem>): RecyclerView.Adapter<LiveViewHolder>() {
+    private var itemClickListener: ((Int) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: ((Int) -> Unit)?) {
+        itemClickListener = listener
+    }
+
+    fun setData(dataItems: List<LiveDataItem>) {
+        liveDataItems = dataItems
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LiveViewHolder {
         return LiveViewHolder(LayoutInflater.from(ctx).inflate(R.layout.item_live, parent, false))
     }
@@ -18,6 +29,9 @@ class LiveListAdapter(private val ctx: Context, private val liveDataItems: List<
 
     override fun onBindViewHolder(holder: LiveViewHolder, position: Int) {
         holder.bind(liveDataItems[position])
+        holder.itemView.setOnClickListener {
+            itemClickListener?.let { it1 -> it1(position) }
+        }
     }
 }
 
