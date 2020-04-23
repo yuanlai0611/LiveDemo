@@ -90,7 +90,7 @@ class PlayActivity : AppCompatActivity() {
 
     private fun initMediaView(streamUrl: String) {
         livePlv.setVideoPath(streamUrl)
-        livePlv.displayAspectRatio = PLVideoView.ASPECT_RATIO_PAVED_PARENT
+        livePlv.displayAspectRatio = PLVideoView.ASPECT_RATIO_FIT_PARENT
     }
 
     private val webSocketListener = object : WebSocketListener() {
