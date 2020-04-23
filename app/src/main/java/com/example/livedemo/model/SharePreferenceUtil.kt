@@ -9,6 +9,7 @@ private const val IS_LOGIN = "is_login"
 private const val USR_NAME = "usr_name"
 private const val PHONE = "phone"
 private const val USR_ID = "usr_id"
+private const val ROOM_NUM = "room_num"
 
 fun saveIsLogin(app: Context, isLogin: Boolean) {
     app.getSharedPreferences(LIVE_DEMO, MODE_PRIVATE)
@@ -61,4 +62,15 @@ fun saveUsrId(app: Context, usrId: String) {
 fun getUsrId(app: Context): String? {
     return app.getSharedPreferences(LIVE_DEMO, MODE_PRIVATE)
         .getString(USR_ID, "")
+}
+
+fun saveRoomNum(app: Context, roomNum: String) {
+    app.getSharedPreferences(LIVE_DEMO, MODE_PRIVATE)
+        .edit().putString(ROOM_NUM, roomNum)
+        .apply()
+}
+
+fun getRoomNum(app: Context): String? {
+    return app.getSharedPreferences(LIVE_DEMO, MODE_PRIVATE)
+        .getString(ROOM_NUM, "")
 }

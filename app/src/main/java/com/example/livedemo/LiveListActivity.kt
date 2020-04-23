@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.livedemo.model.getPhone
 import com.example.livedemo.model.savePhone
+import com.example.livedemo.model.saveRoomNum
 import com.example.livedemo.model.saveUsrId
 import com.example.livedemo.request.CommonRsp
 import com.example.livedemo.request.LiveRoomRsp
@@ -52,7 +53,8 @@ class LiveListActivity : AppCompatActivity() {
                 response: Response<CommonRsp<UserRsp>>
             ) {
                 savePhone(this@LiveListActivity, response.body()?.data?.mobile ?: return)
-                saveUsrId(this@LiveListActivity, response.body()?.data?.mobile ?: return)
+                saveUsrId(this@LiveListActivity, response.body()?.data?.id ?: return)
+                saveRoomNum(this@LiveListActivity, response.body()?.data?.roomNum ?: return)
             }
         })
     }

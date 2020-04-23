@@ -4,6 +4,7 @@ import android.Manifest
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.livedemo.model.getRoomNum
 import com.example.livedemo.model.getUsrId
 import com.example.livedemo.model.getUsrName
 import com.example.livedemo.request.BulletMsg
@@ -19,9 +20,11 @@ import me.lake.librestreaming.ws.filter.hardfilter.extra.GPUImageCompatibleFilte
 import okhttp3.Response
 import okhttp3.WebSocket
 import okhttp3.WebSocketListener
+import okio.ByteString
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
+import java.util.logging.Logger
 import kotlin.random.Random
 
 class RecordActivity : AppCompatActivity(), RESConnectionListener,
@@ -61,13 +64,17 @@ class RecordActivity : AppCompatActivity(), RESConnectionListener,
     override fun onResume() {
         super.onResume()
         requestPermission()
-        bulletEt.setText(LiveRoomManager.getLiveUrl(this))
+        liveCv.startStreaming(STREAM_URL.replace("{ROOM_NUM}", roomNum ?: return))
     }
 
     override fun onPause() {
         super.onPause()
         liveCv.destroy()
-        LiveRoomManager.saveLiveUrl(this, bulletEt.text.toString())
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        socket?.cancel()
     }
 
     @AfterPermissionGranted(REQUEST_CAMERA)
@@ -127,13 +134,37 @@ class RecordActivity : AppCompatActivity(), RESConnectionListener,
     }
 
     private fun generateRandomRoomNum(): String {
-        return "room${Random.nextInt(1000)}"
+        return getRoomNum(this) ?: ""
     }
 
     private val socketListener = object : WebSocketListener() {
         override fun onOpen(webSocket: WebSocket, response: Response) {
             super.onOpen(webSocket, response)
             socket = webSocket
+            Log.d(TAG, "open")
+        }
+
+        override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
+            super.onFailure(webSocket, t, response)
+            Log.e(TAG, t.message ?: "")
+        }
+
+        override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
+            super.onClosed(webSocket, code, reason)
+            Log.d(TAG, "close code:$code, reason:$reason")
+        }
+
+        override fun onClosing(webSocket: WebSocket, code: Int, reason: String) {
+            super.onClosing(webSocket, code, reason)
+            Log.d(TAG, "closing code:$code, reason:$reason")
+        }
+
+        override fun onMessage(webSocket: WebSocket, text: String) {
+            super.onMessage(webSocket, text)
+        }
+
+        override fun onMessage(webSocket: WebSocket, bytes: ByteString) {
+            super.onMessage(webSocket, bytes)
         }
     }
 }

@@ -3,6 +3,7 @@ package com.example.livedemo
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +30,7 @@ class PlayActivity : AppCompatActivity() {
         private const val ROOM_NUM = "room_num"
         private const val USR_ID = "usr_id"
         private const val USR_NAME = "usr_name"
+        private const val TAG = "PlayActivity"
 
         fun startActivity(ctx: Context, roomNum: String, usrId: Int, usrName: String) {
             val intent = Intent(ctx, PlayActivity::class.java)
@@ -102,9 +104,14 @@ class PlayActivity : AppCompatActivity() {
 
         override fun onMessage(webSocket: WebSocket, text: String) {
             super.onMessage(webSocket, text)
-            val bulletMsg = Gson().fromJson<BulletMsg>(text, BulletMsg::class.java)
-            bulletDataItems.add(BulletDataItem(usrName = bulletMsg.name, msg = bulletMsg.msg))
-            bulletAdapter?.notifyDataSetChanged()
+            try {
+                val bulletMsg = Gson().fromJson<BulletMsg>(text, BulletMsg::class.java)
+                bulletDataItems.add(BulletDataItem(usrName = bulletMsg.name, msg = bulletMsg.msg))
+                bulletAdapter?.notifyItemInserted(bulletDataItems.size - 1)
+                bulletRv.scrollBy(0, -1000)
+            } catch (e: Exception) {
+                Log.e(TAG, e.message, e)
+            }
         }
 
         override fun onOpen(webSocket: WebSocket, response: Response) {

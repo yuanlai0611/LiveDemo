@@ -1,17 +1,18 @@
 package com.example.livedemo.request
 
 import android.content.Context
+import android.util.Log
 import com.example.livedemo.model.getToken
 import okhttp3.*
 import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 object RequestManager {
 
     private const val BASE_URL = "http://120.25.229.252/"
-    private const val SOCKET_PATH_PATTERN = "origin/websocket/{roomNum}/{userId}"
-    private var socket: WebSocket? = null
+    private const val SOCKET_URL_PATTERN = "ws://120.25.229.252:8080/websocket/{roomNum}/{userId}"
     private const val TAG = "RequestManager"
 
     private val client by lazy {
@@ -22,7 +23,9 @@ object RequestManager {
     }
 
     private val socketClient by lazy {
-        OkHttpClient.Builder().build()
+        OkHttpClient.Builder()
+            .callTimeout(30, TimeUnit.MINUTES)
+            .connectTimeout(30, TimeUnit.MINUTES).build()
     }
 
     private val loginService by lazy {
@@ -55,9 +58,10 @@ object RequestManager {
 
     fun startSocket(roomNum: String, userId: String, socketListener: WebSocketListener) {
        val socketRequest = Request.Builder()
-            .url((BASE_URL + SOCKET_PATH_PATTERN).replace("{roomNum}", roomNum).replace("{userId}", userId))
+            .url((SOCKET_URL_PATTERN).replace("{roomNum}", roomNum).replace("{userId}", userId))
             .build()
 
+        Log.d(TAG, (SOCKET_URL_PATTERN).replace("{roomNum}", roomNum).replace("{userId}", userId))
         socketClient.newWebSocket(socketRequest, socketListener)
     }
 
